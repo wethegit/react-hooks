@@ -1,6 +1,8 @@
 .eslintrc.yml
 .github
+.nvmrc
 .parcel-cache
 .prettierignore
 .prettierrc.yml
+.vscode
 src
