@@ -1,2 +1,3 @@
 # react-hooks
-A collection of useful React hooks.
+
+A collection of helpers for use in React projects.

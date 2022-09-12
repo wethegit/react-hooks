@@ -1,0 +1,6 @@
+.eslintrc.yml
+.github
+.parcel-cache
+.prettierignore
+.prettierrc.yml
+src
