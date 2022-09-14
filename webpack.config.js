@@ -36,7 +36,7 @@ module.exports = {
     },
   },
   output: {
-    filename: "main.js",
+    filename: "main.mjs",
     path: `${__dirname}/dist`,
     library: {
       type: "module",
