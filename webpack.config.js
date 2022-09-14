@@ -13,18 +13,29 @@ module.exports = {
   },
   resolve: {
     extensions: ["*", ".js", ".jsx"],
-    // alias: {
-    //   react: path.resolve(__dirname, "./node_modules/react"),
-    // },
+    alias: {
+      react: path.resolve("./node_modules/react"),
+    },
   },
   experiments: {
     outputModule: true,
   },
+  externalsType: "module",
+  externals: {
+    react: {
+      commonjs: "react",
+      commonjs2: "react",
+      amd: "react",
+      root: "React",
+      module: "react",
+    },
+  },
   output: {
-    path: path.resolve(__dirname, "./dist"),
     filename: "main.js",
+    path: `${__dirname}/dist`,
     library: {
       type: "module",
     },
+    chunkFormat: "module",
   },
 }
