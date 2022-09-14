@@ -13,6 +13,14 @@
     "local storage",
     "accessibility"
   ],
+  "homepage": "https://github.com/wethegit/react-hooks",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wethegit/react-hooks"
+  },
+  "bugs": {
+    "url": "https://github.com/wethegit/react-hooks/issues"
+  },
   "author": "",
   "license": "MIT",
   "devDependencies": {
