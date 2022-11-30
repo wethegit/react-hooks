@@ -21,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/wethegit/react-hooks/issues"
   },
-  "author": "",
+  "author": "Andrew Rubin <andrew@wethecollective.com> (https://wethecollective.com)",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "~7.19.0",
