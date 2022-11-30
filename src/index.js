@@ -1,5 +1,15 @@
 import { useAsync } from "./hooks/use-async"
 import { useLocalStorage } from "./hooks/use-local-storage"
 import { useUserPrefs } from "./hooks/use-user-prefs"
+import {
+  UserPreferencesProvider,
+  UserPreferencesContext,
+} from "./contexts/user-prefs-context"
 
-export { useAsync, useLocalStorage, useUserPrefs }
+export {
+  useAsync,
+  useLocalStorage,
+  useUserPrefs,
+  UserPreferencesProvider,
+  UserPreferencesContext,
+}
