@@ -15,6 +15,7 @@ module.exports = {
               "@babel/preset-env",
               ["@babel/preset-react", { runtime: "automatic" }],
             ],
+            plugins: ["@babel/plugin-transform-modules-commonjs"]
           },
         },
       },
@@ -38,10 +39,8 @@ module.exports = {
       root: "React",
       module: "react",
     },
+    "React": "React",
   },
-  // externals: {
-  //   "React": "React",
-  // },
   plugins: [
     new webpack.ProvidePlugin({
       "React": "react",
