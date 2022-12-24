@@ -34,6 +34,7 @@ module.exports = {
       root: "React",
       module: "react",
     },
+    "React": "React",
   },
   output: {
     filename: "main.mjs",
