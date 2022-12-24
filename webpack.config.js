@@ -1,5 +1,4 @@
 const path = require("path")
-const webpack = require("webpack")
 
 module.exports = {
   entry: path.resolve(__dirname, "./src/index.js"),
@@ -11,11 +10,7 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: [
-              "@babel/preset-env",
-              ["@babel/preset-react", { runtime: "automatic" }],
-            ],
-            plugins: ["@babel/plugin-transform-modules-commonjs"]
+            presets: ["@babel/preset-env", "@babel/preset-react"],
           },
         },
       },
@@ -39,13 +34,7 @@ module.exports = {
       root: "React",
       module: "react",
     },
-    "React": "React",
   },
-  plugins: [
-    new webpack.ProvidePlugin({
-      "React": "react",
-    }),
-  ],
   output: {
     filename: "main.mjs",
     path: `${__dirname}/dist`,
