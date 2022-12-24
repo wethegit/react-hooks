@@ -24,6 +24,7 @@
   "author": "Andrew Rubin <andrew@wethecollective.com> (https://wethecollective.com)",
   "license": "MIT",
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.20.11",
     "@babel/core": "~7.19.0",
     "@babel/preset-env": "~7.19.0",
     "@babel/preset-react": "~7.18.6",
