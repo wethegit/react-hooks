@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react"
 
-const useInView = (threshold = 0.3, once = true) => {
+const useInView = (threshold = 0.3, once = true, setInViewIfScrolledPast = true) => {
   const [isIntersecting, setIntersecting] = useState(false)
   const [targetRef, setTargetRef] = useState(null)
   const observerRef = useRef(null)
@@ -8,10 +8,13 @@ const useInView = (threshold = 0.3, once = true) => {
 
   const observerCallback = useCallback(
     ([entry], observer) => {
-      const isVisible = entry.isIntersecting || entry.boundingClientRect.top < 0
+      const isVisible =
+        entry.isIntersecting ||
+        (setInViewIfScrolledPast && entry.boundingClientRect.top < 0)
       setIntersecting(isVisible)
       if (once && isVisible) observer.unobserve(entry.target)
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [once]
   )
 
