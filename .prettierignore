@@ -1,4 +1,6 @@
+.github
+.husky
 .vscode
-README.md
 node_modules
-webpack.config.js
+dist
+*.md

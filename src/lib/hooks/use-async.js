@@ -11,11 +11,11 @@ import { useCallback, useEffect, useState } from "react"
  *
  * @example
  * Run it instantly:
- * const { data, status, error } = useAsync(fetch("https://my-cool-api.com/some-endpoint"))
+ * const { data, status, error } = useAsync(() => fetch("https://my-cool-api.com/some-endpoint"))
  * console.log(data)
  *
  * Deferred execution:
- * const { run, data, status, error } = useAsync(fetch("https://my-cool-api.com/some-endpoint"))
+ * const { run, data, status, error } = useAsync(() => fetch("https://my-cool-api.com/some-endpoint"))
  * const handleClick = (event) => run()
  *
  */

@@ -1,5 +1,12 @@
 import { useEffect } from "react"
 
+/**
+ * usePreventScroll
+ * Toggles the `overflow: hidden` CSS declaration on the `<body>` DOM element.
+ *
+ * @param {Boolean} state - Whether to prevent scrolling on the `<body>` element.
+ *
+ */
 const usePreventScroll = (state) => {
   const cleanUpBodyStyle = () => {
     if (!window) return

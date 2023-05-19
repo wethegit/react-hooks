@@ -1,3 +1,7 @@
+import { useContext } from "react"
+import { UserPreferencesContext } from "../contexts/user-prefs-context"
+import { castToBool } from "../utils/cast-to-bool"
+
 /**
  * This is a wrapper around UserPreferencesContext
  * It gives you access to common accessibility preferences which are
@@ -15,11 +19,6 @@
  * } = useUserPrefs()
  *
  */
-
-import { useContext } from "react"
-import { UserPreferencesContext } from "../contexts/user-prefs-context"
-import { castToBool } from "../lib/cast-to-bool"
-
 const useUserPrefs = () => {
   const {
     prefersDarkColorScheme,

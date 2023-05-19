@@ -1,3 +1,20 @@
+import { createContext, useEffect, useRef } from "react"
+import { useLocalStorage } from "../hooks/use-local-storage"
+import { castToBool } from "../utils/cast-to-bool"
+
+/**
+ * @typedef {Object} PreferencesContext
+ * @prop {Boolean} [prefersDarkColorScheme=false] - Whether the user has either turned on "prefers dark color scheme" in their OS-level settings, or has chosen the option exposed by your site via some UI.
+ * @prop {Function} togglePrefersDarkColorScheme - Accepts a single argument (Boolean) which toggles the `localStorage` state of `prefersDarkColorScheme`.
+ * @prop {Boolean} [prefersReducedData=false] - Whether the user has either turned on "prefers reduced data" in their OS-level settings, or has chosen the option exposed by your site via some UI.
+ * @prop {Function} togglePrefersReducedData - Accepts a single argument (Boolean) which toggles the `localStorage` state of `prefersReducedData`.
+ * @prop {Boolean} [prefersReducedMotion=false] - Whether the user has either turned on "prefers reduced motion" in their OS-level settings, or has chosen the option exposed by your site via some UI.
+ * @prop {Function} togglePrefersReducedMotion - Accepts a single property (Boolean) which toggles the `localStorage` state of `prefersReducedMotion`.
+ */
+
+/** @type {PreferencesContext} */
+const UserPreferencesContext = createContext({})
+
 /**
  * Maintains a globally-available data store for the user's a11y preferences.
  *
@@ -8,14 +25,11 @@
  *
  * For the most part, you should use the `useUserPrefs` interface
  * to work with this context (see `/hooks/use-user-prefs.js`)
+ *
+ * @param {Object} props
+ * @param {React.ReactNode} props.children
+ * @returns {React.Context<PreferencesContext>.Provider}
  */
-
-import { createContext, useEffect, useRef } from "react"
-import { useLocalStorage } from "../hooks/use-local-storage"
-import { castToBool } from "../lib/cast-to-bool"
-
-const UserPreferencesContext = createContext()
-
 const UserPreferencesProvider = ({ children }) => {
   // Create our state for all values we want to store client-side:
   const [prefersReducedMotion, setPrefersReducedMotion] = useLocalStorage(
