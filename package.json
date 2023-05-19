@@ -5,8 +5,6 @@
   "files": [
     "dist"
   ],
-  "style": "dist/style.css",
-  "css": "dist/style.css",
   "type": "module",
   "main": "./dist/react-hooks.umd.cjs",
   "module": "./dist/react-hooks.js",
@@ -14,15 +12,13 @@
     ".": {
       "import": "./dist/react-hooks.js",
       "require": "./dist/react-hooks.umd.cjs"
-    },
-    "./style.css": "./dist/style.css"
+    }
   },
   "scripts": {
     "prepare": "husky install",
     "dev": "vite",
-    "build": "npm run lint:scripts && npm run lint:styles && vite build",
-    "lint:scripts": "eslint --fix --ext .jsx,js --ignore-path .gitignore .",
-    "lint:styles": "stylelint src/**/*.{css,scss}"
+    "build": "npm run lint:scripts && vite build",
+    "lint:scripts": "eslint --fix --ext .jsx,js --ignore-path .gitignore ."
   },
   "publishConfig": {
     "access": "public"
@@ -34,7 +30,6 @@
   },
   "lint-staged": {
     "*.{js,jsx}": "eslint --fix",
-    "*.{css,scss}": "stylelint --fix",
     "*": "prettier -w -u"
   },
   "keywords": [
@@ -69,13 +64,7 @@
     "postcss-scss": "^4.0.6",
     "prettier": "^2.8.8",
     "sass": "^1.62.1",
-    "vite": "^4.3.2",
-    "stylelint": "^15.6.2",
-    "stylelint-config-recommended": "^12.0.0",
-    "stylelint-config-standard": "^33.0.0",
-    "stylelint-config-standard-scss": "^9.0.0",
-    "stylelint-order": "^6.0.3",
-    "stylelint-selector-bem-pattern": "^2.1.1"
+    "vite": "^4.3.2"
   },
   "dependencies": {
     "react": "^17.0.2",
