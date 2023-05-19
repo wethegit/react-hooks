@@ -1,6 +1,6 @@
 {
   "name": "@wethegit/react-hooks",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.0",
   "description": "A collection of helpers for use in React projects.",
   "files": [
     "dist"
