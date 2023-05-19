@@ -1,5 +1,12 @@
 import { useEffect, useReducer } from "react"
-import { castToBool } from "../lib/cast-to-bool"
+import { castToBool } from "../utils/cast-to-bool"
+
+const reducer = (_, action) => {
+  if (typeof action === "string" && (action === "true" || action === "false")) {
+    return castToBool(action)
+  }
+  return action
+}
 
 /**
  * Manage state which also gets saved to the browser's localStorage
@@ -12,14 +19,6 @@ import { castToBool } from "../lib/cast-to-bool"
  * const [favoriteFruit, setFavoriteFruit] = useLocalStorage("fruit", "apple")
  *
  */
-
-const reducer = (state, action) => {
-  if (typeof action === "string" && (action === "true" || action === "false")) {
-    return castToBool(action)
-  }
-  return action
-}
-
 const useLocalStorage = (key, defaultValue = "") => {
   const [state, setState] = useReducer(reducer, defaultValue)
 
