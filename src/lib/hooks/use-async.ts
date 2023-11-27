@@ -1,13 +1,25 @@
 import { useCallback, useEffect, useState } from "react"
 
+export enum Status {
+  Idle = "idle",
+  Pending = "pending",
+  Success = "success",
+  Error = "error",
+}
+
+export interface useAsyncReturn<T> {
+  run: () => void
+  data: T | null
+  status: Status
+  error: Error | null
+}
+
 /**
  * useAsync
  *
  * @param {Function} asyncFn - The asynchronous function to run
- * @param {Boolean} [deferred=false] - whether to save the function to a variable
- * for later use (true) or run it instantly (false).
- * @returns {Object} Properties include a run() function which is used to subsequently
- * call the function (if deferred); the resulting data; and the status and error states.
+ * @param {Boolean} [deferred=false] - whether to save the function to a variable for later use (true) or run it instantly (false).
+ * @returns {Object} Properties include a run() function which is used to subsequently call the function (if deferred); the resulting data; and the status and error states.
  *
  * @example
  * Run it instantly:
@@ -19,26 +31,28 @@ import { useCallback, useEffect, useState } from "react"
  * const handleClick = (event) => run()
  *
  */
-const useAsync = (asyncFn, deferred = false) => {
-  const [status, setStatus] = useState("idle")
-  const [data, setData] = useState(null)
+export function useAsync<T>(
+  asyncFn: () => Promise<T>,
+  deferred: boolean = false
+): useAsyncReturn<T> {
+  const [status, setStatus] = useState(Status.Idle)
+  const [data, setData] = useState<T | null>(null)
   const [error, setError] = useState(null)
 
   // Wrapping the call to the async function in a callback which manages some state
   // around the function itself. This also has the benefit of "caching" it, so the asyncFn
   // won't get redeclared on every render:
   const run = useCallback(() => {
-    setStatus("pending")
+    setStatus(Status.Pending)
 
-    return asyncFn()
+    asyncFn()
       .then((res) => {
         setData(res)
-        setStatus("success")
+        setStatus(Status.Success)
       })
       .catch((err) => {
-        // console.log(err)
         setError(err)
-        setStatus("error")
+        setStatus(Status.Error)
       })
   }, [asyncFn])
 
@@ -50,5 +64,3 @@ const useAsync = (asyncFn, deferred = false) => {
 
   return { run, data, status, error }
 }
-
-export { useAsync }

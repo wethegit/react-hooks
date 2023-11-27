@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useState } from "react"
 
 /**
- * React hook for matching a media query and persisting the result in localStorage
+ * React hook for matching a media query and persisting the result in localStorage.
+ * It returns `null` if the `window` object is not available, e.g. during SSR. Or a boolean if the media query matches or not.
+ * Important to note that the hook prioritizes the media query over the localStorage value and will update the localStorage value when the media query changes.
  */
 export function usePersistedMediaQuery(
   storageKey: string,
@@ -21,9 +23,11 @@ export function usePersistedMediaQuery(
     const mql = window.matchMedia(mediaQuery)
 
     setState((current) => {
+      // if state is null, this is the first render and probably came from
       if (current === null) {
         const value = localStorage.getItem(storageKey)
 
+        // if there is no value in localStorage we use the media query as out default
         if (value === null) return mql.matches
 
         return JSON.parse(value)
@@ -32,6 +36,8 @@ export function usePersistedMediaQuery(
       return current
     })
 
+    // we prioritize the listener over the storage value
+    // and always update when that changes
     const mqlListener = (e: MediaQueryListEvent) => {
       updateState(e.matches)
     }

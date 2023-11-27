@@ -7,12 +7,14 @@ import { useEffect } from "react"
  * @param {Boolean} state - Whether to prevent scrolling on the `<body>` element.
  *
  */
-const usePreventScroll = (state) => {
+export function usePreventScroll(state: boolean) {
   const cleanUpBodyStyle = () => {
     if (!window) return
+
     const bodyStyleAttr = document.body.getAttribute("style")
+
     if (bodyStyleAttr)
-      document.body.style = bodyStyleAttr.replace("overflow: hidden;", "")
+      document.body.setAttribute("style", bodyStyleAttr.replace("overflow: hidden;", ""))
   }
 
   useEffect(() => {
@@ -21,5 +23,3 @@ const usePreventScroll = (state) => {
     return () => cleanUpBodyStyle()
   }, [state])
 }
-
-export { usePreventScroll }
