@@ -3,7 +3,7 @@
   "changelog": [
     "@changesets/changelog-github",
     {
-      "repo": "wethegit/react-modal"
+      "repo": "wethegit/react-hooks"
     }
   ],
   "commit": false,
