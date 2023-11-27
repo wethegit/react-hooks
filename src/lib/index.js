@@ -1,3 +1,4 @@
+export * from "./hooks/use-animate-presence"
 export * from "./hooks/use-async"
 export * from "./hooks/use-in-view"
 export * from "./hooks/use-persisted-state"
