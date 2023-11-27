@@ -4,7 +4,7 @@
 .eslintrc
 .prettierignore
 .prettierrc
-.stylelintrc
 index.html
 vite.config.js
 src
+tsconfig.json

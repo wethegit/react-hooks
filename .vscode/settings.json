@@ -9,12 +9,10 @@
   },
   "eslint.format.enable": true,
   "eslint.nodePath": "",
-  "eslint.packageManager": "npm",
   "files.associations": {
     "*.js": "javascriptreact",
     "*.jsx": "javascriptreact",
     "*.json": "json",
   },
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "stylelint.validate": ["css", "scss"]
+  "javascript.updateImportsOnFileMove.enabled": "always"
 }
