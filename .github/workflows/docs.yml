@@ -21,7 +21,7 @@ permissions:
   id-token: write
 
 jobs:
-  storybook:
+  docs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -38,10 +38,12 @@ jobs:
           node-version: 18
 
       - name: Install Dependencies
-        run: yarn install --immutable
+        working-directory: ./docs
+        run: npm ci
 
-      - name: Build Storybook
-        run: npx turbo run build --filter=@wethegit/components
+      - name: Build Docusaurus
+        working-directory: ./docs
+        run: npm run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
@@ -49,7 +51,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: "./packages/wethegit-components/storybook-static"
+          path: "./docs/build"
 
       - name: Deploy to GitHub Pages
         id: deployment
