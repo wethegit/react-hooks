@@ -1,6 +1,7 @@
-.github
-.husky
-.vscode
-node_modules
-dist
-*.md
+**/.github
+**/.husky
+**/.vscode
+**/node_modules
+**/dist
+**/*.md
+**/.docusaurus

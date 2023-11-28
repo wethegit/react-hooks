@@ -1,0 +1,251 @@
+import { AnimatePresenceDemo } from "../components/use-animate-presence-demo"
+
+# useAnimatePresence
+
+▸ **useAnimatePresence**(`props`: [`AnimatePresenceProps`](#animatepresenceprops)): [`AnimatePresenceReturn`](#animatepresencereturn)
+
+# useAnimatePresence
+
+`useAnimatePresence` helps you animate components that are added or removed from the DOM.
+
+Great for things like modals, tooltips, dropdowns, etc.
+
+- [Usage](#usage)
+- [Basic example](#basic-example)
+- [Custom animation](#custom-animation)
+- [Accessibility](#accessibility)
+- [Don't animate on mount](#dont-animate-on-mount)
+
+## Demo
+
+<AnimatePresenceDemo />
+
+## Usage
+
+## Basic example
+
+By default all you need to provide is a boolean that determines whether the element should be visible or not. The hook will return a `render` boolean that you can use to conditionally render the element.
+
+It will also return a `animate` boolean, which is a shorthand for `state === OPENING || state === OPENED` that you can use to conditionally apply your animation.
+
+```jsx
+import { useState } from "react"
+import { useAnimatePresence } from "@wethegit/react-hooks"
+
+function MyComponent() {
+  const [isVisible, setIsVisible] = useState(false)
+
+  const { render, animate } = useAnimatePresence({
+    isVisible,
+    duration: 500,
+  })
+
+  return (
+    <>
+      <button onClick={() => setIsVisible((cur) => !cur)}>
+        {render ? "Hide" : "Show"}
+      </button>
+
+      {render && (
+        <div className={`my-component ${animate && "is-visible"}`}>
+          Hey! I animate in and out!
+        </div>
+      )}
+    </>
+  )
+}
+```
+
+And then in your styles:
+
+```css
+.my-component {
+  opacity: 0;
+  transition: opacity 500ms ease-out;
+
+  &.is-visible {
+    opacity: 1;
+  }
+}
+```
+
+## Custom animation
+
+The hook will return a `currentDuration` number that you can use to set the duration of your animation. This is optional, but very useful so you don't have to hardcode the duration in your styles.
+
+It will also return a `state` enum that you can use to control the animation in every step.
+
+```jsx
+import { useAnimatePresence, AnimatePresenceStates } from "@local/hooks"
+
+function MyComponent() {
+  // ... shortened for brevity
+  const { render, animate, currentDuration } = useAnimatePresence({
+    state,
+    isVisible,
+    duration: {
+      // different durations for enter and exit
+      enter: 1000,
+      exit: 500,
+    },
+  })
+
+  // you can control the animation at every step
+  let className
+  if (state === AnimatePresenceStates.ENTERING) {
+    className = "is-entering"
+  } else if (state === AnimatePresenceStates.ENTERED) {
+    className = "is-entered"
+  } else if (state === AnimatePresenceStates.EXITING) {
+    className = "is-exiting"
+  } else if (state === AnimatePresenceStates.EXITED) {
+    className = "is-exited"
+  }
+
+  return (
+    <>
+      {/* render it the same way, the hook takes care of updating the duration */}
+      {render && (
+        <div
+          className={`my-component ${className}`}
+          style={{
+            "--duration": `${currentDuration}ms`,
+          }}
+        >
+          Hey there!
+        </div>
+      )}
+    </>
+  )
+}
+```
+
+And then in your styles:
+
+```css
+.my-component {
+  transition: all var(--transition-duration) ease-out;
+
+  &.is-entering {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+
+  &.is-entered {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  &.is-exiting,
+  &.is-exited {
+    opacity: 0;
+    transform: scale(0) rotate(360deg);
+    transition-timing-function: ease-in;
+  }
+}
+```
+
+## Accessibility
+
+You can use the [`useUserPrefs`](/react-hooks/use-user-prefs) hook to help you with accessibility by disabling animations when the user prefers reduced motion.
+
+```jsx
+import { useAnimatePresence, useUserPrefs } from "@local/hooks"
+
+function MyComponent() {
+  // use the prefersReducedMotion preference to disable animations
+  const { prefersReducedMotion } = useUserPrefs()
+  const { render, animate } = useAnimatePresence({
+    isVisible,
+    // disable animations if the user prefers reduced motion
+    duration: prefersReducedMotion ? 0 : 300,
+  })
+}
+```
+
+## Don't animate on mount
+
+Set `initial` to `true` to have the element start out visible.
+
+```ts
+const { render, animate } = useAnimatePresence({
+  initial: true,
+  isVisible,
+})
+```
+
+## Parameters
+
+| Name    | Type                                            |
+| :------ | :---------------------------------------------- |
+| `props` | [`AnimatePresenceProps`](#animatepresenceprops) |
+
+### AnimatePresenceProps
+
+#### duration
+
+• `Optional` **duration**: `number` \| \{ `enter`: `number` ; `exit`: `number` }
+
+Duration in miliseconds or object with enter and exit duration in miliseconds
+
+**`Default Value`**
+
+```ts
+= 300
+```
+
+#### initial
+
+• `Optional` **initial**: `boolean`
+
+Initial state of the animation, if `true` the component won't animate in on render
+
+**`Default Value`**
+
+```ts
+false
+```
+
+#### isVisible
+
+• **isVisible**: `boolean`
+
+Visibility of the component
+
+## Returns
+
+### AnimatePresenceReturn
+
+#### render
+
+• **render**: `boolean`
+
+`render` is an shorthand for animating the component in and out
+
+#### currentDuration
+
+• **currentDuration**: `number`
+
+Duration of the current animation
+
+#### render
+
+• **render**: `boolean`
+
+Render your component **only** if `render` is `true`
+
+#### state
+
+• **state**: `AnimatePresenceState`
+
+```ts
+export enum AnimatePresenceState {
+  ENTERED = "entered",
+  EXITED = "exited",
+  EXITING = "exiting",
+  ENTERING = "entering",
+  MOUNTED = "mounted",
+}
+```
+
+Current state of the animation. Use it for full control of the animation in all states
