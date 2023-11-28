@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "clean": "turbo run clean && rm -rf .turbo **/node_modules .turbo-cookie",
+    "clean": "turbo run clean && rm -rf .turbo node_modules .turbo-cookie .swc",
     "build": "turbo run build",
     "start": "turbo run start --no-cache --continue",
     "format": "prettier --write \"**/*.{ts,tsx,md,mdx,json}\"",

@@ -12,8 +12,8 @@
   "scripts": {
     "dev": "vite",
     "start": "vite build --watch",
-    "build": "rm -rf dist && npm run lint && vite build",
-    "clean": "rm -rf dist node_modules",
+    "build": "rm -rf dist && vite build",
+    "clean": "rm -rf dist node_modules .turbo",
     "typecheck": "tsc --noEmit",
     "lint": "eslint --fix --ext .jsx,js --ignore-path ../../.gitignore ."
   },
