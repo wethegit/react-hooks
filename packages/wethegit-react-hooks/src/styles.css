@@ -1,8 +1,6 @@
 .animatePresence {
-  --transition-duration: 300ms;
-
   opacity: 0;
-  transition: opacity var(--transition-duration) ease-in-out;
+  transition: opacity var(--duration, 300ms) ease-in-out;
 }
 
 .animatePresenceReveal {

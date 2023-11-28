@@ -4,7 +4,7 @@ import { UserPreferencesProvider, useAnimatePresence } from "@wethegit/react-hoo
 
 function Toggle() {
   const [isVisible, setVisible] = useState(false)
-  const { reveal, shouldRender, runningDuration } = useAnimatePresence({
+  const { animate, render, currentDuration } = useAnimatePresence({
     isVisible,
   })
 
@@ -12,11 +12,11 @@ function Toggle() {
     <>
       <button onClick={() => setVisible((cur) => !cur)}>Toggle</button>
 
-      {shouldRender && (
+      {render && (
         <div
           style={{
-            opacity: reveal ? 1 : 0,
-            transition: `opacity ${runningDuration}ms`,
+            opacity: animate ? 1 : 0,
+            transition: `opacity ${currentDuration}ms`,
           }}
         >
           ✨ Hello world ✨

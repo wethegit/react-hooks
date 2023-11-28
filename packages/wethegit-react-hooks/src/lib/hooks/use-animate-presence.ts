@@ -1,17 +1,47 @@
 import { useEffect, useRef, useState } from "react"
 
+
+
+export enum AnimatePresenceState {
+  ENTERED = "entered",
+  EXITED = "exited",
+  EXITING = "exiting",
+  ENTERING = "entering",
+  MOUNTED = "mounted",
+}
+
+export interface AnimatePresenceReturn {
+  /**
+   * Render your component **only** if `shouldRender` is `true`.
+   */
+  render: boolean
+  /**
+   * `shouldAnimate` is an shorthand for animating the component in and out.
+   */
+  animate: boolean
+  /**
+   * Duration of the current animation. Not necessary to use, but very useful if you have different durations for enter and exit.
+   * You can use this so you don't have to repeat those values in your styles.
+   */
+  currentDuration: number
+  /**
+   * Current state of the animation. Use it for full control of the animation in all states.
+   */
+  state: AnimatePresenceState
+}
+
 export interface AnimatePresenceProps {
   /**
-   * Visibility of the component
+   * Visibility of the component.
    */
   isVisible: boolean
   /**
-   * Initial state of the animation, if `true` the component won't animate in on render
+   * Initial state of the animation, if `true` the component won't animate in on render.
    * @defaultValue false
    */
   initial?: boolean
   /**
-   * Duration in miliseconds or object with enter and exit duration in miliseconds
+   * Duration in miliseconds or object with enter and exit duration in miliseconds.
    * @defaultValue = 300
    */
   duration?:
@@ -22,37 +52,31 @@ export interface AnimatePresenceProps {
       }
 }
 
-export interface AnimatePresenceReturn {
-  /**
-   * Render your component **only** if `shouldRender` is `true`
-   */
-  shouldRender: boolean
-  /**
-   * `reveal` is an shorthand for animating the component in and out
-   */
-  reveal: boolean
-  /**
-   * Duration of the current animation
-   */
-  runningDuration: number
-  /**
-   * Current state of the animation. Use it for full control of the animation in all states
-   */
-  state: AnimatePresenceState
-}
-
-export enum AnimatePresenceState {
-  ENTERED = "entered",
-  EXITED = "exited",
-  EXITING = "exiting",
-  ENTERING = "entering",
-  MOUNTED = "mounted",
-}
-
 /**
  * Helps you animate components in and out of the DOM
  *
  * @param {AnimatePresenceProps} props
+ * @example
+ * ```tsx
+ * import { useState } from 'react'
+ * import { useAnimatePresence } from '@wethegit/react-hooks'
+ *
+ * function Comp() {
+ *   const [isVisibile, setIsVisible] = useState();
+ *   const { render, animate } = useAnimatePresence({
+ *     isVisible
+ *   })
+ *
+ *   return (
+ *     <>
+ *       <button onClick={() => setIsVisible(cur => !cur)}>{render && 'Hide' : 'Show'}</button>
+ *       {render && (
+ *         <div classNames={`component ${animate && 'component-in'}`>Animate me</div>
+ *       )}
+ *     </>
+ *   )
+ * }
+ * ```
  */
 export function useAnimatePresence({
   initial = false,
@@ -115,10 +139,10 @@ export function useAnimatePresence({
   }, [isVisible])
 
   return {
-    shouldRender: state !== AnimatePresenceState.EXITED,
-    reveal:
+    render: state !== AnimatePresenceState.EXITED,
+    animate:
       state === AnimatePresenceState.ENTERING || state === AnimatePresenceState.ENTERED,
-    runningDuration:
+    currentDuration:
       state === AnimatePresenceState.ENTERING ? durationEnter : durationExit,
     state,
   }

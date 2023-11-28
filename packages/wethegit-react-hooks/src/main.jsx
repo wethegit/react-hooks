@@ -25,9 +25,13 @@ function App() {
   const [fruit, setFruit] = usePersistedState("fruit", "Orange")
   const { prefersReducedMotion, setPrefersReducedMotion } = useUserPrefs()
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)")
-  const [animateIn, setAnimateIn] = useState(false)
-  const { shouldRender, reveal, runningDuration } = useAnimatePresence({
-    isVisible: animateIn,
+  const [isVisible, setIsVisible] = useState(false)
+  const { render, animate, currentDuration } = useAnimatePresence({
+    isVisible,
+    duration: {
+      enter: 500,
+      exit: 800,
+    },
   })
 
   return (
@@ -46,13 +50,15 @@ function App() {
       <section>
         <h2>useAnimatePresence</h2>
         <p>This will animate in and out of the dom with a transition</p>
-        <button onClick={() => setAnimateIn((cur) => !cur)}>Reveal!</button>
-        {shouldRender && (
+        <button onClick={() => setIsVisible((cur) => !cur)}>
+          {render ? "Hide" : "Animate!"}
+        </button>
+        {render && (
           <section
             style={{
-              "--transition-duration": `${runningDuration}ms`,
+              "--duration": `${currentDuration}ms`,
             }}
-            className={`animatePresence ${reveal && "animatePresenceReveal"}`}
+            className={`animatePresence ${animate && "animatePresenceReveal"}`}
           >
             Heyo! 🦄
           </section>
