@@ -12,12 +12,11 @@ Use it for things like modals, tooltips, dropdowns, etc.
 
 You are in full control of the animation and the hook only provides you with the current state and the current duration of the animation.
 
-It also takes care of accessibility by forcing `duration` to `0` if the user has enabled reduced motion.
-
 - [Install](#install)
 - [Usage](#usage)
 - [Basic example](#basic-example)
 - [Custom animation](#custom-animation)
+- [Accessibility](#accessibility)
 - [Don't animate on mount](#dont-animate-on-mount)
 
 ## Install
@@ -150,6 +149,27 @@ And then in your styles:
   }
 }
 ```
+
+## Accessibility
+
+You can use the [`useUserPrefs`](/react-hooks/use-user-prefs) hook to help you with accessibility.
+
+```jsx
+import { useAnimatePresence, useUserPrefs } from "@local/hooks"
+
+function MyComponent() {
+  const [isVisible, setIsVisible] = useState(false)
+
+  // use the prefersReducedMotion preference to disable animations
+  const { prefersReducedMotion } = useUserPrefs()
+  const { shouldRender, reveal, runningDuration } = useAnimatePresence({
+    isVisible,
+    // disable animations if the user prefers reduced motion
+    duration: prefersReducedMotion ? 0 : 300
+  })
+}
+```
+
 
 ## Don't animate on mount
 

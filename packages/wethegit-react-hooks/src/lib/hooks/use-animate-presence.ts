@@ -50,8 +50,7 @@ export enum AnimatePresenceState {
 }
 
 /**
- * AnimatePresence is a hook that helps you animate components in and out.
- * You are in full control of the animation and the hook only provides you with the current state and the current duration of the animation.
+ * Helps you animate components in and out of the DOM
  *
  * @param {AnimatePresenceProps} props
  */
