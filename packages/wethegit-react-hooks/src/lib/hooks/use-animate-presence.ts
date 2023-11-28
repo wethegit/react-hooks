@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from "react"
 
-import { useUserPrefs } from "../contexts/user-prefs-context"
-
 export interface AnimatePresenceProps {
   /**
    * Visibility of the component
@@ -54,7 +52,6 @@ export enum AnimatePresenceState {
 /**
  * AnimatePresence is a very simple hook that helps you animate components in and out.
  * You are in full control of the animation and the hook only provides you with the current state and the current duration of the animation.
- * It also takes care of accessibility by forcing duration to `0` if the user has enabled reduced motion.
  *
  * @param {AnimatePresenceProps} props
  */
@@ -63,24 +60,15 @@ export function useAnimatePresence({
   duration = 300,
   isVisible = false,
 }: AnimatePresenceProps): AnimatePresenceReturn {
-  const { prefersReducedMotion } = useUserPrefs()
   const skipMountAnimation = useRef<boolean>(initial)
   const [state, setState] = useState<AnimatePresenceState>(
     skipMountAnimation.current
       ? AnimatePresenceState.ENTERED
       : AnimatePresenceState.EXITED
   )
-  const durationEnter = prefersReducedMotion
-    ? 0
-    : typeof duration === "number"
-    ? duration
-    : duration.enter
+  const durationEnter = typeof duration === "number" ? duration : duration.enter
 
-  const durationExit = prefersReducedMotion
-    ? 0
-    : typeof duration === "number"
-    ? duration
-    : duration.exit
+  const durationExit = typeof duration === "number" ? duration : duration.exit
 
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
