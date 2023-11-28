@@ -22,19 +22,26 @@ export function usePersistedMediaQuery(
   useEffect(() => {
     const mql = window.matchMedia(mediaQuery)
 
-    setState((current) => {
-      // if state is null, this is the first render and probably came from
-      if (current === null) {
-        const value = localStorage.getItem(storageKey)
+    const matches = mql.matches
 
-        // if there is no value in localStorage we use the media query as out default
-        if (value === null) return mql.matches
+    // if the media query matches, we update the state and return the value
+    // giving priority to the media query
+    if (matches) {
+      updateState(matches)
+    } else {
+      setState((current) => {
+        if (current === null) {
+          const value = localStorage.getItem(storageKey)
 
-        return JSON.parse(value)
-      }
+          // if there is no value in localStorage we use the media query as out default
+          if (value === null) return matches
 
-      return current
-    })
+          return JSON.parse(value)
+        }
+
+        return current
+      })
+    }
 
     // we prioritize the listener over the storage value
     // and always update when that changes

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react"
+
 import { useUserPrefs } from "../contexts/user-prefs-context"
 
 export interface AnimatePresenceProps {
@@ -84,8 +85,6 @@ export function useAnimatePresence({
   useEffect(() => {
     clearTimeout(timer.current)
 
-    console.log({ state })
-
     if (state === AnimatePresenceState.MOUNTED) {
       timer.current = setTimeout(() => {
         setState(AnimatePresenceState.ENTERING)
@@ -115,11 +114,9 @@ export function useAnimatePresence({
         ) {
           return AnimatePresenceState.MOUNTED
         }
-      }
-
-      if (
-        current === AnimatePresenceState.ENTERED ||
-        current === AnimatePresenceState.ENTERING
+      } else if (
+        current !== AnimatePresenceState.EXITED &&
+        current !== AnimatePresenceState.EXITING
       ) {
         return AnimatePresenceState.EXITING
       }

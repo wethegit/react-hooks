@@ -23,7 +23,10 @@ export function usePersistedState<T = string>(
 
       if (storedValue === null) {
         setState(defaultValue)
+        return
       }
+
+      setState(JSON.parse(storedValue))
     }
 
     window.localStorage.setItem(prefixedKey, JSON.stringify(state))
