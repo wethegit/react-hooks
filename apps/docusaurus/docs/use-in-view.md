@@ -11,7 +11,7 @@ Detects whether a DOM element is in the viewport, using the `IntersectionObserve
 | ------------------------ | ----------- | ----------- |
 | threshold                | Float       | Default: `0.3`. A value between 0 and 1, which maps to a percentage of the DOM element's height. Once this amount of the DOM element is within the viewport, the hook will consider the element "in view". This value is directly passed to an `IntersectionObserver`, so for more details on what this argument means, check out the [IntersectionObserver docs](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) on MDN. |
 | once                     | Boolean     | Default: `true`. Whether to detach the observer from the DOM element after the first intersection callback is invoked. |
-| setInViewIfScrolledPast  | Boolean     | Default: `true`. Whether to consider the element already "in-view", if the top of it is already scrolled beyond the bounds of the viewport when this hook is called. |
+| setInViewIfScrolledPast  | Boolean     | Default: `false`. Whether to consider the element already "in-view", if the top of it is already scrolled beyond the bounds of the viewport when this hook is called. |
 
 ## Return
 

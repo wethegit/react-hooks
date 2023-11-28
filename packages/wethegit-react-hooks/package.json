@@ -15,7 +15,7 @@
     "build": "rm -rf dist && npm run lint && vite build",
     "clean": "rm -rf dist node_modules",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint --fix --ext .jsx,js --ignore-path .gitignore ."
+    "lint": "eslint --fix --ext .jsx,js --ignore-path ../../.gitignore ."
   },
   "publishConfig": {
     "access": "public"

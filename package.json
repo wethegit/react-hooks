@@ -8,7 +8,7 @@
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
     "changeset": "changeset",
-    "release": "turbo run build && changeset publish",
+    "release": "turbo run build --filter=@wethegit/react-hooks && changeset publish",
     "version": "changeset version"
   },
   "devDependencies": {
