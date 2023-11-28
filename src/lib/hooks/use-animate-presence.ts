@@ -8,7 +8,7 @@ export interface AnimatePresenceProps {
    */
   isVisible: boolean
   /**
-   * Initial state of the animation
+   * Initial state of the animation, if `true` the component won't animate in on render
    * @defaultValue false
    */
   initial?: boolean
@@ -55,6 +55,7 @@ export enum AnimatePresenceState {
  * AnimatePresence is a very simple hook that helps you animate components in and out.
  * You are in full control of the animation and the hook only provides you with the current state and the current duration of the animation.
  * It also takes care of accessibility by forcing duration to `0` if the user has enabled reduced motion.
+ * @param {AnimatePresenceProps} props
  */
 export function useAnimatePresence({
   initial = false,

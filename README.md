@@ -1,8 +1,9 @@
 # react-hooks
 
-A collection of helpers for use in React projects.  
+A collection of helpers for use in React projects.
 
 Jump to a section:
+
 - [useAsync](#useAsync)
 - [useInView](#useInView)
 - [useLocalStorage](#useLocalStorage)
@@ -10,7 +11,9 @@ Jump to a section:
 - [useUserPrefs](#useUserPrefs)
 
 ## Installation
+
 Install from the NPM registry using your package manager of choice.
+
 ```bash
 npm install @wethegit/react-hooks
 ```
@@ -24,20 +27,20 @@ Manages the calling of an asynchronous JavaScript function, while providing the 
 
 #### Arguments
 
-| Arguments   | Type     | Description |
-| ----------- | -------- | ----------- |
-| asyncFn     | Function | A JavaScript function which returns a Promise. |
-| deferred    | Boolean  | Optional. Whether to defer the execution of `asyncFn`. Default: `false`. |
+| Arguments | Type     | Description                                                              |
+| --------- | -------- | ------------------------------------------------------------------------ |
+| asyncFn   | Function | A JavaScript function which returns a Promise.                           |
+| deferred  | Boolean  | Optional. Whether to defer the execution of `asyncFn`. Default: `false`. |
 
 #### Return value
 
 `useAsync` returns an Object containing the following properties:
 
-| Property | Type     | Description |
-| -------- | -------- | ----------- |
-| data     | -        | The data returned from the resolved Promise, as a result of calling `asyncFn`. |
-| status   | String   | One of: `"idle"`, `"pending"`, `"success"`, or `"error"`. |
-| error    | String   | The error, if applicable, as thrown by `asyncFn`. |
+| Property | Type     | Description                                                                                                                        |
+| -------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| data     | -        | The data returned from the resolved Promise, as a result of calling `asyncFn`.                                                     |
+| status   | String   | One of: `"idle"`, `"pending"`, `"success"`, or `"error"`.                                                                          |
+| error    | String   | The error, if applicable, as thrown by `asyncFn`.                                                                                  |
 | run      | Function | The function to invoke at a later time, which calls `asyncFn`. This will be null if the `deferred` argument was passed as `false`. |
 
 #### Usage
@@ -50,7 +53,7 @@ import { useAsync } from "@wethegit/react-hooks"
 const MyComponent = () => {
   const { data, status, error } = useAsync(() =>
     fetch("https://my-cool-api.com/some-endpoint")
-  );
+  )
 
   console.log(data, status, error)
 }
@@ -62,8 +65,8 @@ Deferred invocation of the provided async function:
 import { useAsync } from "@wethegit/react-hooks"
 
 const MyComponent = () => {
-  const { run, data, status, error } = useAsync(() =>
-    fetch("https://my-cool-api.com/some-endpoint"),
+  const { run, data, status, error } = useAsync(
+    () => fetch("https://my-cool-api.com/some-endpoint"),
     true
   )
 
@@ -74,9 +77,7 @@ const MyComponent = () => {
 
   console.log(data, status, error)
 
-  return (
-    <button onClick={getMyData}>Get data</button>
-  )
+  return <button onClick={getMyData}>Get data</button>
 }
 ```
 
@@ -87,21 +88,21 @@ Detects whether a DOM element is in the viewport, using the `IntersectionObserve
 
 #### Arguments
 
-| Arguments                | Type        | Description |
-| ------------------------ | ----------- | ----------- |
-| threshold                | Float       | Default: `0.3`. A value between 0 and 1, which maps to a percentage of the DOM element's height. Once this amount of the DOM element is within the viewport, the hook will consider the element "in view". This value is directly passed to an `IntersectionObserver`, so for more details on what this argument means, check out the [IntersectionObserver docs](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) on MDN. |
-| once                     | Boolean     | Default: `true`. Whether to detach the observer from the DOM element after the first intersection callback is invoked. |
-| setInViewIfScrolledPast  | Boolean     | Default: `true`. Whether to consider the element already "in-view", if the top of it is already scrolled beyond the bounds of the viewport when this hook is called. |
+| Arguments               | Type    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ----------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| threshold               | Float   | Default: `0.3`. A value between 0 and 1, which maps to a percentage of the DOM element's height. Once this amount of the DOM element is within the viewport, the hook will consider the element "in view". This value is directly passed to an `IntersectionObserver`, so for more details on what this argument means, check out the [IntersectionObserver docs](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) on MDN. |
+| once                    | Boolean | Default: `true`. Whether to detach the observer from the DOM element after the first intersection callback is invoked.                                                                                                                                                                                                                                                                                                                                |
+| setInViewIfScrolledPast | Boolean | Default: `true`. Whether to consider the element already "in-view", if the top of it is already scrolled beyond the bounds of the viewport when this hook is called.                                                                                                                                                                                                                                                                                  |
 
 #### Return value
 
 `useInView` returns an Array containing the following values:
 
-| Return value             | Type        | Description |
-| ------------------------ | ----------- | ----------- |
-| setTargetRef             | Function    | Pass this function to the `ref` prop of the DOM element you want to track visibility of. |
-| isIntersecting           | Boolean     | Whether the target DOM element is in view, based on the provided `threshold` argument. |
-| targetRef                | React Ref   | The DOM node itself, once set by the `setTargetRef` function. |
+| Return value   | Type      | Description                                                                              |
+| -------------- | --------- | ---------------------------------------------------------------------------------------- |
+| setTargetRef   | Function  | Pass this function to the `ref` prop of the DOM element you want to track visibility of. |
+| isIntersecting | Boolean   | Whether the target DOM element is in view, based on the provided `threshold` argument.   |
+| targetRef      | React Ref | The DOM node itself, once set by the `setTargetRef` function.                            |
 
 #### Usage
 
@@ -125,7 +126,6 @@ const MyComponent = () => {
 }
 ```
 
-
 ### `useLocalStorage`
 
 Reads and writes a piece of state to the browser's local storage.  
@@ -133,19 +133,19 @@ Reads and writes a piece of state to the browser's local storage.
 
 #### Arguments
 
-| Arguments      | Type        | Description |
-| -------------- | ----------- | ----------- |
-| key            | String      | The name of the property you wish to save to `localStorage`. |
-| defaultValue   | String      | Default: `""`. The default / initial value to set to the `localStorage` key. |
+| Arguments    | Type   | Description                                                                  |
+| ------------ | ------ | ---------------------------------------------------------------------------- |
+| key          | String | The name of the property you wish to save to `localStorage`.                 |
+| defaultValue | String | Default: `""`. The default / initial value to set to the `localStorage` key. |
 
 #### Return Value
 
 `useLocalStorage` returns an Array containing the following values:
 
-| Arguments      | Type        | Description |
-| -------------- | ----------- | ----------- |
-| state          | String      | The current value of the `localStorage` key in the browser. |
-| setState       | Function    | State setter function, used to update the `localStorage` value in the browser. |
+| Arguments | Type     | Description                                                                    |
+| --------- | -------- | ------------------------------------------------------------------------------ |
+| state     | String   | The current value of the `localStorage` key in the browser.                    |
+| setState  | Function | State setter function, used to update the `localStorage` value in the browser. |
 
 #### Usage
 
@@ -168,7 +168,10 @@ const FruitSelector = () => {
             {FRUITS.map((fruit) => (
               <li key={fruit}>
                 <input
-                  type="radio" name="fruit" id={fruit} value={fruit}
+                  type="radio"
+                  name="fruit"
+                  id={fruit}
+                  value={fruit}
                   onChange={() => setFruit(fruit)}
                 />
                 <label for={fruit}>{fruit}</label>
@@ -191,9 +194,9 @@ Toggles the `overflow: hidden` CSS declaration on the `<body>` DOM element.
 
 #### Arguments
 
-| Arguments   | Type      | Description |
-| ----------- | --------- | ----------- |
-| state       | Boolean   | Whether to prevent scrolling on the `<body>` element. |
+| Arguments | Type    | Description                                           |
+| --------- | ------- | ----------------------------------------------------- |
+| state     | Boolean | Whether to prevent scrolling on the `<body>` element. |
 
 #### Usage
 
@@ -229,14 +232,14 @@ Provides access to various user preferences, the values of which are stored in t
 
 `useUserPrefs` returns an Object containing the following properties:
 
-| Property                      | Type     | Description |
-| ----------------------------- | -------- | ----------- |
-| prefersDarkColorScheme        | Boolean  | Whether the user has either turned on "prefers dark color scheme" in their OS-level settings, or has chosen the option exposed by your site via some UI. |
-| togglePrefersDarkColorScheme  | Function | Accepts a single argument (Boolean) which toggles the `localStorage` state of `prefersDarkColorScheme`. |
-| prefersReducedData            | Boolean  | Whether the user has either turned on "prefers reduced data" in their OS-level settings, or has chosen the option exposed by your site via some UI. |
-| togglePrefersReducedData      | Function | Accepts a single argument (Boolean) which toggles the `localStorage` state of `prefersReducedData`. |
-| prefersReducedMotion          | Boolean  | Whether the user has either turned on "prefers reduced motion" in their OS-level settings, or has chosen the option exposed by your site via some UI. |
-| togglePrefersReducedMotion    | Function | Accepts a single property (Boolean) which toggles the `localStorage` state of `prefersReducedMotion`. |
+| Property                     | Type     | Description                                                                                                                                              |
+| ---------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| prefersDarkColorScheme       | Boolean  | Whether the user has either turned on "prefers dark color scheme" in their OS-level settings, or has chosen the option exposed by your site via some UI. |
+| togglePrefersDarkColorScheme | Function | Accepts a single argument (Boolean) which toggles the `localStorage` state of `prefersDarkColorScheme`.                                                  |
+| prefersReducedData           | Boolean  | Whether the user has either turned on "prefers reduced data" in their OS-level settings, or has chosen the option exposed by your site via some UI.      |
+| togglePrefersReducedData     | Function | Accepts a single argument (Boolean) which toggles the `localStorage` state of `prefersReducedData`.                                                      |
+| prefersReducedMotion         | Boolean  | Whether the user has either turned on "prefers reduced motion" in their OS-level settings, or has chosen the option exposed by your site via some UI.    |
+| togglePrefersReducedMotion   | Function | Accepts a single property (Boolean) which toggles the `localStorage` state of `prefersReducedMotion`.                                                    |
 
 #### Usage
 
@@ -249,9 +252,7 @@ import Menu from "../somewhere"
 const MyComponent = () => {
   const { prefersReducedMotion } = useUserPrefs()
 
-  return (
-    <Menu animationDuration={prefersReducedMotion ? 1200 : 0} />
-  )
+  return <Menu animationDuration={prefersReducedMotion ? 1200 : 0} />
 }
 ```
 
@@ -269,7 +270,7 @@ const THEMES = {
   light: {
     color: "#000",
     background: "#fff",
-  }
+  },
 }
 
 const MyComponent = () => {
@@ -277,8 +278,6 @@ const MyComponent = () => {
 
   const theme = THEMES[prefersDarkColorScheme ? "dark" : "light"]
 
-  return (
-    <Menu color={theme.color} background={theme.background} />
-  )
+  return <Menu color={theme.color} background={theme.background} />
 }
 ```
