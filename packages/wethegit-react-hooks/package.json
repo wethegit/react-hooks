@@ -15,7 +15,7 @@
     "build": "rm -rf dist && vite build",
     "clean": "rm -rf dist node_modules .turbo",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint --fix --ext .jsx,js --ignore-path ../../.gitignore ."
+    "lint": "eslint --fix --ext .jsx,js ."
   },
   "publishConfig": {
     "access": "public"

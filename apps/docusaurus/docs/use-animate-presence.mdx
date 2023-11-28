@@ -165,11 +165,10 @@ function MyComponent() {
   const { shouldRender, reveal, runningDuration } = useAnimatePresence({
     isVisible,
     // disable animations if the user prefers reduced motion
-    duration: prefersReducedMotion ? 0 : 300
+    duration: prefersReducedMotion ? 0 : 300,
   })
 }
 ```
-
 
 ## Don't animate on mount
 
