@@ -6,25 +6,6 @@ Manage state which also gets saved to the browser's localStorage.
 Returns `null` if the `window` object is not available, e.g. during SSR.
 `defaultValue` should not be `null` or `undefined` as it will be used to determine the type of the state.
 
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | `string` |
-
-## Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `key` | `string` |
-| `defaultValue` | `T` |
-
-### Returns
-
-An array containing the state and a function to update it.
-
-[`T` \| ``null``, (`v`: `T` \| ``null``) => `void`]
-
 ## Usage
 
 Setting a `localStorage` value for a user's favorite fruit, based on their selection:
@@ -61,3 +42,23 @@ const FruitSelector = () => {
   )
 }
 ```
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | `string` |
+
+## Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `key` | `string` |
+| `defaultValue` | `T` |
+
+### Returns
+
+An array containing the state and a function to update it.
+
+[`T` \| ``null``, (`v`: `T` \| ``null``) => `void`]
+

@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from "react"
 
-
-
 export enum AnimatePresenceState {
   ENTERED = "entered",
   EXITED = "exited",
