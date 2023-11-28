@@ -1,12 +1,40 @@
----
-id: "PreferencesContext"
-title: "Interface: PreferencesContext"
-sidebar_label: "PreferencesContext"
-sidebar_position: 0
-custom_edit_url: null
----
+# UserPreferencesProvider
 
-## Properties
+▸ **UserPreferencesProvider**(`props`: [UserPreferencesProviderProps](#userpreferencesproviderprops)): [`PreferencesContext`](#preferencescontext)
+
+Maintains a globally-available data store for the user's a11y preferences.
+
+This keeps track of the following properties:
+- prefersReduceMotion
+- prefersReducedData
+- prefersDarkColorScheme
+
+It also toggles the following classes on the `<body>` element:
+- `is-reduced-motion`
+- `is-reduced-data`
+- `is-dark-color-scheme`
+
+These classes can be customized by passing in a `globalClassNames` object to the provider.
+
+For the most part, you should use the `useUserPrefs` interface to work with this context (see `/hooks/use-user-prefs.js`)
+
+## UserPreferencesProviderProps
+
+### children
+
+• **children**: `ReactNode`
+
+### globalClassNames
+
+• `Optional` **globalClassNames**: `Object`
+
+| Name | Type |
+| :------ | :------ |
+| `prefersDarkColorScheme` | `string` |
+| `prefersReducedData` | `string` |
+| `prefersReducedMotion` | `string` |
+
+## PreferencesContext
 
 ### prefersDarkColorScheme
 
@@ -20,12 +48,6 @@ Whether the user has either turned on "prefers dark color scheme" in their OS-le
 false
 ```
 
-#### Defined in
-
-[contexts/user-prefs-context.tsx:10](https://github.com/wethegit/react-hooks/blob/7e03ba1/src/lib/contexts/user-prefs-context.tsx#L10)
-
-___
-
 ### prefersReducedData
 
 • **prefersReducedData**: ``null`` \| `boolean`
@@ -38,31 +60,15 @@ Whether the user has either turned on "prefers reduced data" in their OS-level s
 false
 ```
 
-#### Defined in
-
-[contexts/user-prefs-context.tsx:19](https://github.com/wethegit/react-hooks/blob/7e03ba1/src/lib/contexts/user-prefs-context.tsx#L19)
-
-___
-
 ### prefersReducedMotion
 
 • **prefersReducedMotion**: ``null`` \| `boolean`
 
 Whether the user has either turned on "prefers reduced motion" in their OS-level settings, or has chosen the option exposed by your site via some UI.
 
-#### Defined in
-
-[contexts/user-prefs-context.tsx:27](https://github.com/wethegit/react-hooks/blob/7e03ba1/src/lib/contexts/user-prefs-context.tsx#L27)
-
-___
-
 ### setPrefersDarkColorScheme
 
 • **setPrefersDarkColorScheme**: (`value`: `boolean`) => `void`
-
-#### Type declaration
-
-▸ (`value`): `void`
 
 Accepts a single argument (Boolean) which toggles the `localStorage` state of `prefersDarkColorScheme`.
 
@@ -72,23 +78,9 @@ Accepts a single argument (Boolean) which toggles the `localStorage` state of `p
 | :------ | :------ |
 | `value` | `boolean` |
 
-##### Returns
-
-`void`
-
-#### Defined in
-
-[contexts/user-prefs-context.tsx:14](https://github.com/wethegit/react-hooks/blob/7e03ba1/src/lib/contexts/user-prefs-context.tsx#L14)
-
-___
-
 ### setPrefersReducedData
 
 • **setPrefersReducedData**: (`value`: `boolean`) => `void`
-
-#### Type declaration
-
-▸ (`value`): `void`
 
 Accepts a single argument (Boolean) which toggles the `localStorage` state of `prefersReducedData`.
 
@@ -98,23 +90,9 @@ Accepts a single argument (Boolean) which toggles the `localStorage` state of `p
 | :------ | :------ |
 | `value` | `boolean` |
 
-##### Returns
-
-`void`
-
-#### Defined in
-
-[contexts/user-prefs-context.tsx:23](https://github.com/wethegit/react-hooks/blob/7e03ba1/src/lib/contexts/user-prefs-context.tsx#L23)
-
-___
-
 ### setPrefersReducedMotion
 
 • **setPrefersReducedMotion**: (`value`: `boolean`) => `void`
-
-#### Type declaration
-
-▸ (`value`): `void`
 
 Accepts a single argument (Boolean) which toggles the `localStorage` state of `prefersReducedMotion`.
 
@@ -123,11 +101,3 @@ Accepts a single argument (Boolean) which toggles the `localStorage` state of `p
 | Name | Type |
 | :------ | :------ |
 | `value` | `boolean` |
-
-##### Returns
-
-`void`
-
-#### Defined in
-
-[contexts/user-prefs-context.tsx:31](https://github.com/wethegit/react-hooks/blob/7e03ba1/src/lib/contexts/user-prefs-context.tsx#L31)

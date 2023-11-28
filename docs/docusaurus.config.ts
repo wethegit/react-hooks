@@ -8,7 +8,7 @@ const config: Config = {
   favicon: "img/favicon.ico",
 
   // Set the production url of your site here
-  url: "https://your-docusaurus-site.example.com",
+  url: "https://wethegit.github.io",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: "/react-hooks/",
@@ -47,9 +47,9 @@ const config: Config = {
     // Replace with your project's social card
     image: "img/docusaurus-social-card.jpg",
     navbar: {
-      title: "My Site",
+      title: "@wethegit/react-hooks",
       logo: {
-        alt: "My Site Logo",
+        alt: "@wethegit/react-hooks",
         src: "img/logo.svg",
       },
       items: [
@@ -62,7 +62,7 @@ const config: Config = {
     },
     footer: {
       style: "dark",
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} We The Collective Inc.`,
     },
     prism: {
       theme: prismThemes.github,

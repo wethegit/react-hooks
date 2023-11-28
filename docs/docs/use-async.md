@@ -1,16 +1,18 @@
-# `useAsync`
+# useAsync
+
+▸ **useAsync**\<`T`\>(`asyncFn`, `deferred?`): [`useAsyncReturn`](#return)\<`T`\>
 
 Manages the calling of an asynchronous JavaScript function, while providing the return data and the state of the function call.
 `useAsync(asyncFn, [deferred])`
 
-#### Arguments
+## Parameters
 
 | Arguments   | Type     | Description |
 | ----------- | -------- | ----------- |
 | asyncFn     | Function | A JavaScript function which returns a Promise. |
 | deferred    | Boolean  | Optional. Whether to defer the execution of `asyncFn`. Default: `false`. |
 
-#### Return value
+## Return
 
 `useAsync` returns an Object containing the following properties:
 

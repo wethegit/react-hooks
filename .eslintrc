@@ -26,11 +26,11 @@
     ]
   },
   "ignorePatterns": [
-    "**/*/node_modules/",
-    "**/*/dist/",
+    "**/node_modules/",
+    "**/dist/",
     "**/*.{css, scss}",
-    "**/*/.eslintrc.*",
-    "**/*/vite.config.ts",
-    "docs/**/*"
+    "**/.eslintrc.*",
+    "**/vite.config.ts",
+    "**/docs/"
   ]
 }

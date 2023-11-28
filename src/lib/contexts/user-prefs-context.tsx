@@ -58,6 +58,8 @@ export interface UserPreferencesProviderProps {
  * These classes can be customized by passing in a `globalClassNames` object to the provider.
  *
  * For the most part, you should use the `useUserPrefs` interface to work with this context (see `/hooks/use-user-prefs.js`)
+ *
+ * @param {UserPreferencesProviderProps} props
  */
 export function UserPreferencesProvider({
   children,

@@ -1,15 +1,17 @@
-# `usePreventScroll`
+# usePreventScroll
+
+▸ **usePreventScroll**(`state`: `boolean`): `void`
 
 Toggles the `overflow: hidden` CSS declaration on the `<body>` DOM element.
 `usePreventScroll(state)`
 
-#### Arguments
+## Parameters
 
-| Arguments   | Type      | Description |
-| ----------- | --------- | ----------- |
-| state       | Boolean   | Whether to prevent scrolling on the `<body>` element. |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `state` | `boolean` | Whether to prevent scrolling on the `<body>` element. |
 
-#### Usage
+## Usage
 
 Toggling scrollability of the `<body>` element, based on whether a modal window is displayed:
 

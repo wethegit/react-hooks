@@ -1,35 +1,41 @@
-# `usePersistedState`
+# usePersistedState
 
-Reads and writes a piece of state to the browser's local storage.
-`useLocalStorage(key, [defaultValue])`
+▸ **usePersistedState**\<`T`\>(`key`: `string`, `defaultValue`: `T`): [`UsePersistedStateReturn`](#returns)
 
-#### Arguments
+Manage state which also gets saved to the browser's localStorage.
+Returns `null` if the `window` object is not available, e.g. during SSR.
+`defaultValue` should not be `null` or `undefined` as it will be used to determine the type of the state.
 
-| Arguments      | Type        | Description |
-| -------------- | ----------- | ----------- |
-| key            | String      | The name of the property you wish to save to `localStorage`. |
-| defaultValue   | String      | Default: `""`. The default / initial value to set to the `localStorage` key. |
+#### Type parameters
 
-#### Return Value
+| Name | Type |
+| :------ | :------ |
+| `T` | `string` |
 
-`useLocalStorage` returns an Array containing the following values:
+## Parameters
 
-| Arguments      | Type        | Description |
-| -------------- | ----------- | ----------- |
-| state          | String      | The current value of the `localStorage` key in the browser. |
-| setState       | Function    | State setter function, used to update the `localStorage` value in the browser. |
+| Name | Type |
+| :------ | :------ |
+| `key` | `string` |
+| `defaultValue` | `T` |
 
-#### Usage
+### Returns
+
+An array containing the state and a function to update it.
+
+[`T` \| ``null``, (`v`: `T` \| ``null``) => `void`]
+
+## Usage
 
 Setting a `localStorage` value for a user's favorite fruit, based on their selection:
 
 ```jsx
-import { useLocalStorage } from "@wethegit/react-hooks"
+import { usePersistedState } from "@wethegit/react-hooks"
 
 const FRUITS = ["Apple", "Banana", "Orange"]
 
 const FruitSelector = () => {
-  const [fruit, setFruit] = useLocalStorage("fruit")
+  const [fruit, setFruit] = usePersistedState("fruit")
 
   return (
     <>

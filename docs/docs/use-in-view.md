@@ -1,9 +1,11 @@
-# `useInView`
+# useInView
+
+▸ **useInView**(`threshold?`, `once?`, `setInViewIfScrolledPast?`): [`InViewReturn`](#return)
 
 Detects whether a DOM element is in the viewport, using the `IntersectionObserver` API.
 `useInView([threshold], [once], [setInViewIfScrolledPast])`
 
-#### Arguments
+## Parameters
 
 | Arguments                | Type        | Description |
 | ------------------------ | ----------- | ----------- |
@@ -11,7 +13,7 @@ Detects whether a DOM element is in the viewport, using the `IntersectionObserve
 | once                     | Boolean     | Default: `true`. Whether to detach the observer from the DOM element after the first intersection callback is invoked. |
 | setInViewIfScrolledPast  | Boolean     | Default: `true`. Whether to consider the element already "in-view", if the top of it is already scrolled beyond the bounds of the viewport when this hook is called. |
 
-#### Return value
+## Return
 
 `useInView` returns an Array containing the following values:
 
@@ -21,7 +23,7 @@ Detects whether a DOM element is in the viewport, using the `IntersectionObserve
 | isIntersecting           | Boolean     | Whether the target DOM element is in view, based on the provided `threshold` argument. |
 | targetRef                | React Ref   | The DOM node itself, once set by the `setTargetRef` function. |
 
-#### Usage
+## Usage
 
 Toggling a className on and off, based on whether a `<section>` is in view:
 

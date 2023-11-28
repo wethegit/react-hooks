@@ -1,7 +1,7 @@
-**/*/.github
-**/*/.husky
-**/*/.vscode
-**/*/node_modules
-**/*/dist
-**/*/*.md
-**/*/.docusaurus
+**/.github
+**/.husky
+**/.vscode
+**/node_modules
+**/dist
+**/*.md
+**/.docusaurus
