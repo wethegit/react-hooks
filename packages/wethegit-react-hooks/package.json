@@ -30,7 +30,7 @@
   "homepage": "https://github.com/wethegit/react-hooks",
   "repository": {
     "type": "git",
-    "url": "https://github.com/wethegit/react-hooks"
+    "url": "git+https://github.com/wethegit/react-hooks.git"
   },
   "bugs": {
     "url": "https://github.com/wethegit/react-hooks/issues"
@@ -38,15 +38,13 @@
   "author": "Andrew Rubin <andrew@wethecollective.com> (https://wethecollective.com)",
   "license": "MIT",
   "devDependencies": {
-    "@changesets/changelog-github": "~0.4.8",
-    "@changesets/cli": "~2.26.2",
     "@types/node": "~20.10.0",
     "@types/react": "~18.2.38",
     "@types/react-dom": "~18.2.17",
     "@typescript-eslint/eslint-plugin": "~6.13.0",
     "@typescript-eslint/parser": "~6.13.0",
     "@vitejs/plugin-react-swc": "^3.0.0",
-    "eslint": "^8.38.0",
+    "eslint": "^8.48.0",
     "eslint-config-prettier": "~8.3.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
