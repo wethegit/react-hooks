@@ -20,7 +20,7 @@ export type InViewHook = [
  *
  * @param {Number} threshold - A value between 0 and 1, which maps to a percentage of the DOM element's height. Once this amount of the DOM element is within the viewport, the hook will consider the element "in view". This value is directly passed to an `IntersectionObserver`
  * @param {Boolean} [once=true] - Whether to detach the observer from the DOM element after the first intersection callback is invoked
- * @param {Boolean} [setInViewIfScrolledPast=true] - Whether to consider the element already "in-view", if the top of it is already scrolled beyond the bounds of the viewport when this hook is called.
+ * @param {Boolean} [setInViewIfScrolledPast=false] - Whether to consider the element already "in-view", if the top of it is already scrolled beyond the bounds of the viewport when this hook is called.
  *
  * @example
  * const [setSectionRef, sectionInView] = useInView()
@@ -30,7 +30,7 @@ export type InViewHook = [
 export function useInView(
   threshold: number = 0.3,
   once: boolean = true,
-  setInViewIfScrolledPast: boolean = true
+  setInViewIfScrolledPast: boolean = false
 ): InViewHook {
   const [isIntersecting, setIntersecting] = useState(false)
   const [targetRef, setTargetRef] = useState<HTMLElement>()
