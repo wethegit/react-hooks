@@ -99,7 +99,7 @@ export function useAnimatePresence({
     if (state === AnimatePresenceState.MOUNTED) {
       timer.current = setTimeout(() => {
         setState(AnimatePresenceState.ENTERING)
-      }, 10)
+      }, 100)
     } else if (state === AnimatePresenceState.ENTERING) {
       timer.current = setTimeout(() => {
         setState(AnimatePresenceState.ENTERED)
