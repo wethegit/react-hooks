@@ -8,7 +8,14 @@
   "type": "module",
   "main": "./dist/react-hooks.js",
   "types": "./dist/main.d.ts",
-  "exports": "./dist/react-hooks.js",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/main.d.ts",
+        "default": "./dist/react-hooks.js"
+      }
+    }
+  },
   "scripts": {
     "dev": "vite",
     "start": "vite build --watch",
