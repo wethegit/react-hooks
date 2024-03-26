@@ -1,5 +1,11 @@
 # @wethegit/react-hooks
 
+## 2.0.1
+
+### Minor Changes
+
+- [#10](https://github.com/wethegit/react-hooks/pull/10) - hotfix: types exports
+
 ## 2.0.0
 
 ### Major Changes
