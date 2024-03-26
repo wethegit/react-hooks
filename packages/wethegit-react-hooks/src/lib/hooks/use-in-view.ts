@@ -12,7 +12,7 @@ export type InViewHook<T extends HTMLElement> = [
   /**
    * The DOM node itself, once set by the `setTargetRef` function.
    */
-  T | undefined
+  T | undefined,
 ]
 
 /**
