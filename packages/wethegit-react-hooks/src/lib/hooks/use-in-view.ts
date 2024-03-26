@@ -1,10 +1,10 @@
 import { useState, useRef, useEffect, useCallback } from "react"
 
-export type InViewHook = [
+export type InViewHook<T extends HTMLElement> = [
   /**
    * Pass this function to the `ref` prop of the DOM element you want to track visibility of.
    */
-  (node: HTMLElement) => void,
+  (node: T) => void,
   /**
    * Whether the target DOM element is in view, based on the provided `threshold` argument.
    */
@@ -12,7 +12,7 @@ export type InViewHook = [
   /**
    * The DOM node itself, once set by the `setTargetRef` function.
    */
-  HTMLElement | undefined,
+  T | undefined,
 ]
 
 /**
@@ -27,13 +27,13 @@ export type InViewHook = [
  * <section ref={setSectionRef} className={sectionInView ? "in-view" : ""}>
  *
  */
-export function useInView(
+export function useInView<T extends HTMLElement>(
   threshold: number = 0.3,
   once: boolean = true,
   setInViewIfScrolledPast: boolean = false
-): InViewHook {
+): InViewHook<T> {
   const [isIntersecting, setIntersecting] = useState(false)
-  const [targetRef, setTargetRef] = useState<HTMLElement>()
+  const [targetRef, setTargetRef] = useState<T>()
   const observerRef = useRef<IntersectionObserver>()
 
   const observerCallback = useCallback<IntersectionObserverCallback>(
