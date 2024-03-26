@@ -1,5 +1,17 @@
 # @wethegit/react-hooks
 
+## 2.0.3
+
+### Patch Changes
+
+- fix: changeset
+
+## 2.0.2
+
+### Major Changes
+
+- [#12](https://github.com/wethegit/react-hooks/pull/12) [`5687f5d`](https://github.com/wethegit/react-hooks/commit/5687f5d2251219c8f294ec8d7fcaa354ab65616f) Thanks [@marlonmarcello](https://github.com/marlonmarcello)! - [hooks] fix(useInView): returned element type based on generic
+
 ## 2.0.1
 
 ### Minor Changes
