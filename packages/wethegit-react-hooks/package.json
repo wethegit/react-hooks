@@ -13,7 +13,8 @@
       "import": {
         "types": "./dist/main.d.ts",
         "default": "./dist/react-hooks.js"
-      }
+      },
+      "require": "./dist/react-hooks.js"
     }
   },
   "scripts": {
