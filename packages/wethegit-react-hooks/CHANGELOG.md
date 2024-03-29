@@ -1,5 +1,11 @@
 # @wethegit/react-hooks
 
+## 2.0.4
+
+### Patch Changes
+
+- [#14](https://github.com/wethegit/react-hooks/pull/14) [`ac38ad4`](https://github.com/wethegit/react-hooks/commit/ac38ad499b6de8b2a669a35c249b8ec43e1b3caa) Thanks [@marlonmarcello](https://github.com/marlonmarcello)! - fix: support commonjs
+
 ## 2.0.3
 
 ### Patch Changes
