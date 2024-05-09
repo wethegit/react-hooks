@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from "react"
+import { useCallback, useEffect, useMemo, useState, useRef } from "react"
 
 export type InViewHook<T extends HTMLElement> = [
   /**
@@ -6,7 +6,7 @@ export type InViewHook<T extends HTMLElement> = [
    */
   (node: T) => void,
   /**
-   * Whether the target DOM element is in view, based on the provided `threshold` argument.
+   * Whether the target DOM element is in view, based on the provided options.
    */
   boolean,
   /**
@@ -15,26 +15,47 @@ export type InViewHook<T extends HTMLElement> = [
   T | undefined,
 ]
 
+export interface IntersectionObserverOptions {
+  root?: Element
+  rootMargin?: string
+  threshold?: number | number[]
+}
+
+// This is only assigned for readability's sake.
+export type ObserverThreshold = number
+
 /**
  * useInView
  *
- * @param {Number} threshold - A value between 0 and 1, which maps to a percentage of the DOM element's height. Once this amount of the DOM element is within the viewport, the hook will consider the element "in view". This value is directly passed to an `IntersectionObserver`
- * @param {Boolean} [once=true] - Whether to detach the observer from the DOM element after the first intersection callback is invoked
- * @param {Boolean} [setInViewIfScrolledPast=false] - Whether to consider the element already "in-view", if the top of it is already scrolled beyond the bounds of the viewport when this hook is called.
+ * @param {number|IntersectionObserverInit} [observerOptions=0] - Number between 0 and 1, or an IntersectionObserver options object.
+ * @param {Boolean} [once=false] - Whether to detach the observer from the DOM element after the first intersection callback is invoked.
+ * @param {Boolean} [setInViewIfScrolledPast=false] - Whether to consider the element already "in-view", if it is already scrolled beyond the bounds of the viewport when the target element is mounted.
  *
  * @example
- * const [setSectionRef, sectionInView] = useInView()
+ * const [setSectionRef, sectionInView] = useInView(0.3);
  * <section ref={setSectionRef} className={sectionInView ? "in-view" : ""}>
  *
+ * @example
+ * const [setSectionRef, sectionInView] = useInView({ threshold: 0.3, rootMargin: "0px 30% 0px 0px" });
+ * <section ref={setSectionRef} className={sectionInView ? "in-view" : ""}>
  */
 export function useInView<T extends HTMLElement>(
-  threshold: number = 0.3,
-  once: boolean = true,
+  observerOptions: ObserverThreshold | IntersectionObserverInit = 0,
+  once: boolean = false,
   setInViewIfScrolledPast: boolean = false
 ): InViewHook<T> {
   const [isIntersecting, setIntersecting] = useState(false)
   const [targetRef, setTargetRef] = useState<T>()
   const observerRef = useRef<IntersectionObserver>()
+
+  // coerce the observerOptions input into what's expected by the IntersectionObserver interface:
+  const settings = useMemo(
+    () =>
+      typeof observerOptions === "number"
+        ? { threshold: observerOptions }
+        : observerOptions,
+    [observerOptions]
+  )
 
   const observerCallback = useCallback<IntersectionObserverCallback>(
     ([entry], observer) => {
@@ -50,20 +71,22 @@ export function useInView<T extends HTMLElement>(
   )
 
   useEffect(() => {
-    if (observerRef.current) return
+    if (observerRef.current || !targetRef) return
 
-    if (!targetRef) return
-
-    const optionsRef = typeof threshold === "number" ? { threshold } : threshold
-
-    observerRef.current = new IntersectionObserver(observerCallback, optionsRef)
-
+    observerRef.current = new IntersectionObserver(observerCallback, settings)
     observerRef.current.observe(targetRef)
 
     return () => {
       if (observerRef.current) observerRef.current.unobserve(targetRef)
     }
-  }, [observerCallback, targetRef, threshold])
+
+    // Important: `settings` must be kept out of this dependency Array.
+    // If that variable changes after the observer is already hooked up
+    // (strict mode is a good use case for when this would occur), then the
+    // observer will catch the early return and have already disconnected.
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [observerCallback, targetRef])
 
   return [setTargetRef, isIntersecting, targetRef]
 }
