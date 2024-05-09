@@ -36,6 +36,11 @@ function App() {
 
   return (
     <>
+      <span
+        className={`inViewTracker ${sectionInView ? "inViewTracker--inView" : ""}`.trim()}
+      >
+        <code>useInView()</code> state: {sectionInView.toString()}
+      </span>
       <section>
         <h2>useAsync</h2>
         <p>Status: {status}</p>
@@ -43,7 +48,10 @@ function App() {
         <p>Data:</p>
         <pre>{JSON.stringify(data, null, 2)}</pre>
       </section>
-      <section ref={setSectionRef} className={sectionInView ? "isInView" : ""}>
+      <section
+        ref={setSectionRef}
+        className={`inViewDemo ${sectionInView ? "isInView" : ""}`.trim()}
+      >
         <h2>useInView</h2>
         <p>A red border means it&apos;s in view!</p>
       </section>
