@@ -15,15 +15,6 @@ export type InViewHook<T extends HTMLElement> = [
   T | undefined,
 ]
 
-export interface IntersectionObserverOptions {
-  root?: Element
-  rootMargin?: string
-  threshold?: number | number[]
-}
-
-// This is only assigned for readability's sake.
-export type ObserverThreshold = number
-
 /**
  * useInView
  *
@@ -36,11 +27,11 @@ export type ObserverThreshold = number
  * <section ref={setSectionRef} className={sectionInView ? "in-view" : ""}>
  *
  * @example
- * const [setSectionRef, sectionInView] = useInView({ threshold: 0.3, rootMargin: "0px 30% 0px 0px" });
+ * const [setSectionRef, sectionInView] = useInView({ threshold: 0.3, rootMargin: "0px 40% 0px 0px" });
  * <section ref={setSectionRef} className={sectionInView ? "in-view" : ""}>
  */
 export function useInView<T extends HTMLElement>(
-  observerOptions: ObserverThreshold | IntersectionObserverInit = 0,
+  observerOptions: number | IntersectionObserverInit = 0,
   once: boolean = false,
   setInViewIfScrolledPast: boolean = false
 ): InViewHook<T> {
