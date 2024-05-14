@@ -7,6 +7,13 @@ on:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  id-token: write
+  issues: write
+  pull-requests: write
+
 jobs:
   release:
     permissions:
@@ -17,15 +24,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Setup Node.js 18.x
-        uses: actions/setup-node@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version-file: '.nvmrc'
 
       - name: Install Dependencies
-        run: yarn install --immutable
+        run: yarn --frozen-lockfile
 
       - name: Lint
         run: yarn lint
