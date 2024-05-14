@@ -7,8 +7,26 @@
   opacity: 1;
 }
 
+.inViewDemo {
+  background: #ddd;
+}
+
 .isInView {
-  border: solid 1px red;
+  outline: 1px solid red;
+}
+
+.inViewTracker {
+  background: red;
+  color: white;
+  padding: 0.6rem 1.5rem;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+.inViewTracker--inView {
+  background: #16f529;
+  color: black;
 }
 
 .isDarkMode {
