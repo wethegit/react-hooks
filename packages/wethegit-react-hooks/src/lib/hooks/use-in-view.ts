@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState, useRef } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 
 export type InViewHook<T extends HTMLElement> = [
   /**
@@ -37,7 +37,6 @@ export function useInView<T extends HTMLElement>(
 ): InViewHook<T> {
   const [isIntersecting, setIntersecting] = useState(false)
   const [targetRef, setTargetRef] = useState<T>()
-  const observerRef = useRef<IntersectionObserver>()
 
   // coerce the observerOptions input into what's expected by the IntersectionObserver interface:
   const settings = useMemo(
@@ -61,23 +60,19 @@ export function useInView<T extends HTMLElement>(
     [once, setInViewIfScrolledPast]
   )
 
-  useEffect(() => {
-    if (observerRef.current || !targetRef) return
+  const observer = useMemo<IntersectionObserver>(() => {
+    return new IntersectionObserver(observerCallback, settings)
+  }, [settings, observerCallback])
 
-    observerRef.current = new IntersectionObserver(observerCallback, settings)
-    observerRef.current.observe(targetRef)
+  useEffect(() => {
+    if (!targetRef) return
+
+    observer.observe(targetRef)
 
     return () => {
-      if (observerRef.current) observerRef.current.unobserve(targetRef)
+      if (observer) observer.unobserve(targetRef)
     }
-
-    // Important: `settings` must be kept out of this dependency Array.
-    // If that variable changes after the observer is already hooked up
-    // (strict mode is a good use case for when this would occur), then the
-    // observer will catch the early return and have already disconnected.
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [observerCallback, targetRef])
+  }, [observer, targetRef])
 
   return [setTargetRef, isIntersecting, targetRef]
 }
