@@ -1,5 +1,11 @@
 # @wethegit/react-hooks
 
+## 3.0.1
+
+### Patch Changes
+
+- [#39](https://github.com/wethegit/react-hooks/pull/39) [`ab04588`](https://github.com/wethegit/react-hooks/commit/ab045882b9a0c2badd3c8785a3ce86094689a27e) Thanks [@andrewrubin](https://github.com/andrewrubin)! - Bumping patch version due to preexisting 3.0.0 package release.
+
 ## 3.0.0
 
 ### Major Changes
