@@ -18,7 +18,7 @@
     "typescript": "5.4.5"
   },
   "dependencies": {
-    "@changesets/changelog-github": "~0.4.8",
+    "@changesets/changelog-github": "~0.5.0",
     "@changesets/cli": "~2.27.5"
   },
   "packageManager": "yarn@1.22.19",
