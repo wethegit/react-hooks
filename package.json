@@ -1,5 +1,6 @@
 {
   "private": true,
+  "name": "react-hooks",
   "scripts": {
     "clean": "turbo run clean && rm -rf .turbo node_modules .turbo-cookie .swc",
     "build": "turbo run build",
