@@ -1,4 +1,4 @@
-name: Lint
+name: Build
 
 on:
   pull_request:
@@ -8,7 +8,7 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   lint:
-    name: Lint
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -22,4 +22,4 @@ jobs:
       - name: Install Dependencies
         run: yarn --frozen-lockfile
 
-      - run: yarn lint
+      - run: yarn build
