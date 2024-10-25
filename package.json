@@ -1,10 +1,11 @@
 {
   "private": true,
+  "name": "react-hooks",
   "scripts": {
     "clean": "turbo run clean && rm -rf .turbo node_modules .turbo-cookie .swc",
     "build": "turbo run build",
     "start": "turbo run start --no-cache --continue",
-    "format": "prettier --write \"**/*.{ts,tsx,md,mdx,json}\"",
+    "format": "prettier --write \"**/*.{ts,tsx,md,mdx,json,js,css,scss,html,mjs}\"",
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
     "changeset": "changeset",
@@ -12,7 +13,6 @@
     "version": "changeset version"
   },
   "devDependencies": {
-    "eslint": "^9.11.1",
     "prettier": "^3.3.3",
     "turbo": "latest",
     "typescript": "5.6.2"
