@@ -59,7 +59,7 @@ export default [
 
     settings: {
       react: {
-        version: "17.2",
+        version: "detect",
       },
 
       jest: {
