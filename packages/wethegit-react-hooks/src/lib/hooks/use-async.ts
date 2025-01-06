@@ -16,7 +16,7 @@ export interface useAsyncReturn<T> {
 
 /**
  * useAsync
- *
+ * @deprecated Use the new React `use` or `cache` APIs or `useDeferredValue` hook.
  * @param {Function} asyncFn - The asynchronous function to run
  * @param {Boolean} [deferred=false] - whether to save the function to a variable for later use (true) or run it instantly (false).
  * @returns {Object} Properties include a run() function which is used to subsequently call the function (if deferred); the resulting data; and the status and error states.
