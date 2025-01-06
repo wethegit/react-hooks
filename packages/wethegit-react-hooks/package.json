@@ -46,7 +46,7 @@
   "author": "Andrew Rubin <andrew@wethecollective.com> (https://wethecollective.com)",
   "license": "MIT",
   "devDependencies": {
-    "@eslint/compat": "^1.2.1",
+    "@eslint/compat": "^1.2.4",
     "@eslint/eslintrc": "^3.1.0",
     "@eslint/js": "^9.13.0",
     "@types/node": "~20.16.5",
