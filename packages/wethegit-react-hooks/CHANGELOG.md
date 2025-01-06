@@ -1,5 +1,11 @@
 # @wethegit/react-hooks
 
+## 3.1.0
+
+### Minor Changes
+
+- [#166](https://github.com/wethegit/react-hooks/pull/166) [`2ae86b7`](https://github.com/wethegit/react-hooks/commit/2ae86b70bd767459308128628484e109a8bc9085) Thanks [@marlonmarcello](https://github.com/marlonmarcello)! - Updates React version support and deprecates useAsync
+
 ## 3.0.1
 
 ### Patch Changes
