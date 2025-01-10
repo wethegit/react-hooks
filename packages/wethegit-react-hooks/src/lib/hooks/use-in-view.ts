@@ -60,12 +60,13 @@ export function useInView<T extends HTMLElement>(
     [once, setInViewIfScrolledPast]
   )
 
-  const observer = useMemo<IntersectionObserver>(() => {
+  const observer = useMemo<IntersectionObserver | undefined>(() => {
+    if (typeof IntersectionObserver !== "function") return
     return new IntersectionObserver(observerCallback, settings)
   }, [settings, observerCallback])
 
   useEffect(() => {
-    if (!targetRef) return
+    if (!targetRef || !observer) return
 
     observer.observe(targetRef)
 
