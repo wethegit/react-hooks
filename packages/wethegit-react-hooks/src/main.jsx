@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react"
-import ReactDOM from "react-dom"
+import { createRoot } from "react-dom/client"
 import {
   useAnimatePresence,
   useAsync,
@@ -121,11 +121,11 @@ function App() {
   )
 }
 
-ReactDOM.render(
+const root = createRoot(document.getElementById("root"))
+root.render(
   <React.StrictMode>
     <UserPreferencesProvider>
       <App />
     </UserPreferencesProvider>
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 )
